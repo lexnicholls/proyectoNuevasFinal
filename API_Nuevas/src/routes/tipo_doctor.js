@@ -24,8 +24,8 @@ router.get('/tipo_doctor:id', (req, res) => {
     });
   });
   
-  router.delete('/tipo_doctor', (req, res) => {
-    const { id } = req.body;
+  router.delete('/tipo_doctor:id', (req, res) => {
+    const { id } = req.params;
     mysqlConnection.query('DELETE FROM tipo_doctor WHERE id_tipo_doctor = ?', [id], (err, rows, fields) => {
       if(!err) {
         res.json({status: 'Tipo Doctor Deleted'});
