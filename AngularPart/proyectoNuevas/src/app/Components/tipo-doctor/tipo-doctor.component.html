@@ -1,1 +1,27 @@
-<p>tipo-doctor works!</p>
+<br><br>
+<div class="row">
+    <div class="col-sm-8 float-left"> <input type="text" class="form-control" aria-label="Default"
+            aria-describedby="inputGroup-sizing-default" id="idlabel" onchange="buscarId()"></div>
+    <div class="col-sm-4 float-left"><button type="button" class="btn btn-info" (click)="buscarId()">buscar</button></div>
+</div>
+<br><br>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Tipo Doctor</th>
+            <th scope="col">Acciones</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of arrayTipoDoctor">
+
+            <th>{{item.id_tipo_doctor}}</th>
+            <th>{{item.tipo_doctor}}</th>
+            <th><button type="button" class="btn btn-danger" (click)="eliminar(item.id_tipo_doctor)">Eliminar</button>
+                <button type="button" class="btn btn-warning">Editar</button></th>
+        </tr>
+
+    </tbody>
+</table>

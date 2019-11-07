@@ -46,6 +46,6 @@ password:string;
   login(){
   this.email= $("#email").val();
   this.password = $("#password").val();
-  this.loginServices
+  
   }
 }
