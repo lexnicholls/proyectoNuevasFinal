@@ -9,3 +9,8 @@ app.listen(app.get('port'), () => {
 });
 
 app.use(require('../src/routes/tipo_doctor'));
+app.use(require('../src/routes/tipo_consultorio'));
+app.use(require('../src/routes/paciente'));
+app.use(require('../src/routes/doctores'));
+app.use(require('../src/routes/consultorio'));
+app.use(require('../src/routes/cita'));

@@ -15,7 +15,7 @@ router.get('/tipo_doctor', (req,res) => {
 
 router.get('/tipo_doctor:id', (req, res) => {
     const { id } = req.params; 
-    mysqlConnection.query('SELECT * FROM tipo_doctor WHERE id = ?', [id], (err, rows, fields) => {
+    mysqlConnection.query('SELECT * FROM tipo_doctor WHERE id_tipo_doctor = ?', [id], (err, rows, fields) => {
       if (!err) {
         res.json(rows[0]);
       } else {
@@ -24,9 +24,9 @@ router.get('/tipo_doctor:id', (req, res) => {
     });
   });
   
-  router.delete('/tipo_doctor:id', (req, res) => {
-    const { id } = req.params;
-    mysqlConnection.query('DELETE FROM tipo_doctor WHERE id = ?', [id], (err, rows, fields) => {
+  router.delete('/tipo_doctor', (req, res) => {
+    const { id } = req.body;
+    mysqlConnection.query('DELETE FROM tipo_doctor WHERE id_tipo_doctor = ?', [id], (err, rows, fields) => {
       if(!err) {
         res.json({status: 'Tipo Doctor Deleted'});
       } else {
@@ -36,13 +36,13 @@ router.get('/tipo_doctor:id', (req, res) => {
   });
   
   router.post('/tipo_doctor', (req, res) => {
-    const {id_tipo_doctor, tipo_doctor} = req.body;
-    console.log(id_tipo_doctor, tipo_doctor);
+    const { tipo_doctor} = req.body;
+    console.log( tipo_doctor);
     const query = `
-      INSERT INTO tipo_doctor VALUES (?, ?);
-      CALL tipo_doctorAddOrEdit(@id_tipo_doctor, @tipo_doctor);
+      INSERT INTO tipo_doctor (tipo_doctor)VALUES ( ?);
+      
     `;
-    mysqlConnection.query(query, [id_tipo_doctor, tipo_doctor], (err, rows, fields) => {
+    mysqlConnection.query(query, [tipo_doctor], (err, rows, fields) => {
       if(!err) {
         res.json({status: 'Tipo Doctor Saved'});
       } else {
@@ -51,5 +51,21 @@ router.get('/tipo_doctor:id', (req, res) => {
     });
   
   });
+  router.put('/tipo_doctor:id', (req, res) => {
+    const { tipo_doctor } = req.body;
+    const { id } = req.params;
+    const query = `
+    UPDATE tipo_doctor SET tipo_doctor = ? WHERE id_tipo_doctor = ?;
+    `;
+    console.log(query,tipo_doctor,id);
+    mysqlConnection.query(query, [tipo_doctor, id], (err, rows, fields) => {
+        console.log(query);
+        if (!err) {
+            res.json({ status: 'Tipo_Doctor Updated' });
+        } else {
+            console.log(err);
+        }
+    });
+});
 
 module.exports = router;
