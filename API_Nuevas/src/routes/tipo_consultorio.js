@@ -24,8 +24,8 @@ router.get('/tipo_consultorio:id', (req, res) => {
     });
 });
 
-router.delete('/tipo_consultorio', (req, res) => {
-    const { id } = req.body;
+router.delete('/tipo_consultorio:id', (req, res) => {
+    const { id } = req.params;
     mysqlConnection.query('DELETE FROM tipo_consultorio WHERE id_tipo_consultorio = ?', [id], (err, rows, fields) => {
         if (!err) {
             res.json({ status: 'Tipo Consultorio Deleted' });
