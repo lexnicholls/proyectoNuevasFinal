@@ -13,7 +13,7 @@ mysqlConnection.connect(function(err){
         console.error(err);
         return;
     }else {
-        console.log('db are conection');
+        console.log('Conexión exitosa con la base de datos en XAMPP');
     }
 });
 
